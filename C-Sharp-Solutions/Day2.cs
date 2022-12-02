@@ -1,15 +1,12 @@
 ﻿// Part 1 - 13m 22s 01
 // Part 2 - 19m 50s 03
-class Day2
+class Day2 : Day
 {
-    static void Main()
+    public Day2(string inputPath, bool continueOnError = false) : base(inputPath, continueOnError)
     {
-        string[] input = File.ReadAllLines(@"F:\Advent-Of-Code-2022\C-Sharp-Solutions\Day2.txt");
-        PartOne(input);
-        PartTwo(input);
     }
 
-    static void PartOne(string[] input)
+    public override int PartOne(string[] input)
     {
         int score = 0;
         foreach (string round in input)
@@ -28,10 +25,10 @@ class Day2
             else
                 score += 3;
         }
-        Console.WriteLine($"Day 1: { score }");
+        return score;
     }
 
-    static void PartTwo(string[] input)
+    public override int PartTwo(string[] input)
     {
         int score = 0;
         foreach (string round in input)
@@ -68,6 +65,6 @@ class Day2
                     score += 2;
             }
         }
-        Console.WriteLine($"Day 2: { score }");
+        return score;
     }
 }

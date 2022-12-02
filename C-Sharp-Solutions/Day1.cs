@@ -1,15 +1,12 @@
 ﻿// Part 1 - 18m 06s 17
 // Part 2 - 27m 13s 44
-class Day1
+class Day1 : Day
 {
-    static void Main()
+    public Day1(string inputPath, bool continueOnError = false) : base(inputPath, continueOnError)
     {
-        string[] input = File.ReadAllLines(@"F:\Advent-Of-Code-2022\C-Sharp-Solutions\Day1.txt");
-        PartOne(input);
-        PartTwo(input);
     }
 
-    static void PartOne(string[] input)
+    public override int PartOne(string[] input)
     {
         int maxCalories = 0;
         int currentTotal = 0;
@@ -24,11 +21,10 @@ class Day1
             currentTotal += int.Parse(line);
         }
         maxCalories = Math.Max(currentTotal, maxCalories);
-
-        Console.WriteLine($"Part 1: { maxCalories }");
+        return maxCalories;
     }
 
-    static void PartTwo(string[] input)
+    public override int PartTwo(string[] input)
     {
         int[] maxCalories = new int[3];
         int currentTotal = 0;
@@ -43,8 +39,7 @@ class Day1
             currentTotal += int.Parse(line);
         }
         SetTopValues(ref maxCalories, currentTotal);
-
-        Console.WriteLine($"Part 2: { maxCalories.Sum() }");
+        return maxCalories.Sum();
     }
 
     static void SetTopValues(ref int[] maxCalories, int count)
