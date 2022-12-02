@@ -11,19 +11,13 @@ class Day2 : Day
         int score = 0;
         foreach (string round in input)
         {
-            char opponent = round[0];
-            char player = (char)(round[2] - 23);
-            if (opponent == player)
-                score += 3;
-            else if ((opponent == 'A' && player == 'B') || (opponent == 'B' && player == 'C') || (opponent == 'C' && player == 'A'))
-                score += 6;
-
-            if (player == 'A')
-                score += 1;
-            else if (player == 'B')
-                score += 2;
-            else
-                score += 3;
+            int opponent = MapChar(round[0]);
+            int player = MapChar(round[2]);
+            score += Utils.Mod(player - opponent, 3) switch
+            {
+                0 => 3, 1 => 6, _ => 0
+            };
+            score += player + 1;
         }
         return score;
     }
@@ -33,38 +27,25 @@ class Day2 : Day
         int score = 0;
         foreach (string round in input)
         {
-            char opponent = round[0];
-            char result = round[2];
-            if (result == 'Y')
+            int opponent = MapChar(round[0]);
+            int result = MapChar(round[2]) - 1;
+            score += result switch
             {
-                score += 3;
-                if (opponent == 'A')
-                    score += 1;
-                else if (opponent == 'B')
-                    score += 2;
-                else
-                    score += 3;
-            }
-            else if (result == 'Z')
-            {
-                score += 6;
-                if (opponent == 'A')
-                    score += 2;
-                else if (opponent == 'B')
-                    score += 3;
-                else
-                    score += 1;
-            }
-            else
-            {
-                if (opponent == 'A')
-                    score += 3;
-                else if (opponent == 'B')
-                    score += 1;
-                else
-                    score += 2;
-            }
+                0 => 3, 1 => 6, _ => 0
+            };
+            score += Utils.Mod(opponent + result, 3) + 1;
         }
         return score;
+    }
+
+    static int MapChar(char c)
+    {
+        return c switch
+        {
+            'A' or 'X' => 0,
+            'B' or 'Y' => 1,
+            'C' or 'Z' => 2,
+            _ => throw new NotImplementedException("Invalid char")
+        };
     }
 }
