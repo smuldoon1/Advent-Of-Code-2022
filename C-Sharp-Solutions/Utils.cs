@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 public static class Utils
 {
-    public static int Mod(int a, int b)
-    {
-        return ((a % b) + b) % b;
-    }
+    public static int Mod(int a, int b) => ((a % b) + b) % b;
 } 
