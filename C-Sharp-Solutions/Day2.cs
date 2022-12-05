@@ -6,7 +6,7 @@ class Day2 : Day
     {
     }
 
-    public override int PartOne(string[] input)
+    public override string PartOne(string[] input)
     {
         int score = 0;
         foreach (string round in input)
@@ -19,10 +19,10 @@ class Day2 : Day
             };
             score += player + 1;
         }
-        return score;
+        return score.ToString();
     }
 
-    public override int PartTwo(string[] input)
+    public override string PartTwo(string[] input)
     {
         int score = 0;
         foreach (string round in input)
@@ -35,7 +35,7 @@ class Day2 : Day
             };
             score += Utils.Mod(opponent + result, 3) + 1;
         }
-        return score;
+        return score.ToString();
     }
 
     static int MapChar(char c)

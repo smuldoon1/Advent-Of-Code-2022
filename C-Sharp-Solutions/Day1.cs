@@ -6,7 +6,7 @@ class Day1 : Day
     {
     }
 
-    public override int PartOne(string[] input)
+    public override string PartOne(string[] input)
     {
         int maxCalories = 0;
         int currentTotal = 0;
@@ -21,10 +21,10 @@ class Day1 : Day
             currentTotal += int.Parse(line);
         }
         maxCalories = Math.Max(currentTotal, maxCalories);
-        return maxCalories;
+        return maxCalories.ToString();
     }
 
-    public override int PartTwo(string[] input)
+    public override string PartTwo(string[] input)
     {
         int[] maxCalories = new int[3];
         int currentTotal = 0;
@@ -39,7 +39,7 @@ class Day1 : Day
             currentTotal += int.Parse(line);
         }
         SetTopValues(ref maxCalories, currentTotal);
-        return maxCalories.Sum();
+        return maxCalories.Sum().ToString();
     }
 
     static void SetTopValues(ref int[] maxCalories, int count)

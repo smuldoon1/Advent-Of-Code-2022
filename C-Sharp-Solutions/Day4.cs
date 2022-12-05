@@ -6,7 +6,7 @@ class Day4 : Day
     {
     }
 
-    public override int PartOne(string[] input)
+    public override string PartOne(string[] input)
     {
         int overlaps = 0;
         foreach (string pair in input)
@@ -20,10 +20,10 @@ class Day4 : Day
                 overlaps++;
             }
         }
-        return overlaps;
+        return overlaps.ToString();
     }
 
-    public override int PartTwo(string[] input)
+    public override string PartTwo(string[] input)
     {
         int overlaps = 0;
         foreach (string pair in input)
@@ -37,6 +37,6 @@ class Day4 : Day
                 overlaps++;
             }
         }
-        return overlaps;
+        return overlaps.ToString();
     }
 }

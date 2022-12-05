@@ -14,8 +14,8 @@ public abstract class Day
         string[] input = File.ReadAllLines(@$"F:\Advent-Of-Code-2022\C-Sharp-Solutions\{InputPath}.txt");
         try
         {
-            int day1 = PartOne(input);
-            int day2 = PartTwo(input);
+            string day1 = PartOne(input);
+            string day2 = PartTwo(input);
             PrintResult(day1, day2);
         }
         catch
@@ -26,11 +26,11 @@ public abstract class Day
         }
     }
 
-    public abstract int PartOne(string[] input);
+    public abstract string PartOne(string[] input);
 
-    public abstract int PartTwo(string[] input);
+    public abstract string PartTwo(string[] input);
 
-    public void PrintResult(int answer1, int answer2)
+    public void PrintResult(string answer1, string answer2)
     {
         Console.WriteLine($"Solution for {InputPath}\nPart 1: {answer1}\nPart 2: {answer2}\n");
     }

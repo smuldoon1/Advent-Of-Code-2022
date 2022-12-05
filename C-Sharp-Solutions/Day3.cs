@@ -6,7 +6,7 @@ class Day3 : Day
     {
     }
 
-    public override int PartOne(string[] input)
+    public override string PartOne(string[] input)
     {
         int sum = 0;
         foreach (string line in input)
@@ -25,10 +25,10 @@ class Day3 : Day
                 }
             }
         }
-        return sum;
+        return sum.ToString();
     }
 
-    public override int PartTwo(string[] input)
+    public override string PartTwo(string[] input)
     {
         int sum = 0;
         for (int i = 0; i < input.Length; i += 3)
@@ -53,6 +53,6 @@ class Day3 : Day
                 }
             }
         }
-        return sum;
+        return sum.ToString();
     }
 }
