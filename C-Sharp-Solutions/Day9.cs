@@ -69,35 +69,24 @@ class Day9 : Day
     private static void VisualiseRope(List<(int, int)>[] ropePositions, int millisecondsTimeout = 0)
     {
         StringBuilder display = new();
-        for (int y = 30; y > -30; y--)
+        (int centerX, int centerY) = ropePositions[0].Last();
+        for (int y = ((int)Math.Round(centerY / 25.0)) * 25 + 30; y > ((int)Math.Round(centerY / 25.0)) * 25 - 30; y--)
         {
-            for (int x = -100; x < 100; x++)
+            for (int x = ((int)Math.Round(centerX / 80.0)) * 80 - 100; x < ((int)Math.Round(centerX / 80.0)) * 80 + 100; x++)
             {
                 string s = ".";
                 if (ropePositions[0].Last() == (x, y))
                     s = "H";
-                else if (ropePositions[1].Last() == (x, y))
-                    s = "1";
-                else if (ropePositions[1].Last() == (x, y))
-                    s = "1";
-                else if (ropePositions[2].Last() == (x, y))
-                    s = "2";
-                else if (ropePositions[3].Last() == (x, y))
-                    s = "3";
-                else if (ropePositions[4].Last() == (x, y))
-                    s = "4";
-                else if (ropePositions[5].Last() == (x, y))
-                    s = "5";
-                else if (ropePositions[6].Last() == (x, y))
-                    s = "6";
-                else if (ropePositions[7].Last() == (x, y))
-                    s = "7";
-                else if (ropePositions[8].Last() == (x, y))
-                    s = "8";
-                else if (ropePositions[9].Last() == (x, y))
-                    s = "9";
-                else if (ropePositions[9].Contains((x, y)))
-                    s = "#";
+                else if (ropePositions[ropePositions.Length - 1].Contains((x, y)))
+                    s = ",";
+                for (int i = 1; i < ropePositions.Length; i++)
+                {
+                    if (ropePositions[i].Last() == (x, y))
+                    {
+                        s = (i % 10).ToString();
+                        break;
+                    }
+                }
                 display.Append(s);
             }
             display.Append('\n');
