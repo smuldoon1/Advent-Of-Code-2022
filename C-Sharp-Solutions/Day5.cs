@@ -13,7 +13,7 @@ class Day5 : Day
         (int firstInstruction, Stack<char>[] stacks) = GetStacks(input);
         for (int i = firstInstruction; i < input.Length; i++)
         {
-            var ins = Utils.GetInts(input[i][5..]);
+            var ins = Utils.GetInts(input[i]);
             MoveCratesP1(stacks, ins[0], ins[1] - 1, ins[2] - 1);
         }
         StringBuilder sb = new StringBuilder();
@@ -29,7 +29,7 @@ class Day5 : Day
         (int firstInstruction, Stack<char>[] stacks) = GetStacks(input);
         for (int i = firstInstruction; i < input.Length; i++)
         {
-            var ins = Utils.GetInts(input[i][5..]);
+            var ins = Utils.GetInts(input[i]);
             MoveCratesP2(stacks, ins[0], ins[1] - 1, ins[2] - 1);
         }
         StringBuilder sb = new StringBuilder();

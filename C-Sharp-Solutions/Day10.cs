@@ -48,7 +48,7 @@ class Day10 : Day
             else
                 cycle++;
         }
-        DisplayCrt(crt);
+        //DisplayCrt(crt);
         return "".ToString();
     }
 

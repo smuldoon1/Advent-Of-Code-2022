@@ -20,7 +20,8 @@ namespace C_Sharp_Solutions
                 new Day7("Day7"),
                 new Day8("Day8"),
                 new Day9("Day9"),
-                new Day10("Day10")
+                new Day10("Day10"),
+                new Day11("Day11")
             );
         }
     }

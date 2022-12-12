@@ -12,18 +12,9 @@ public abstract class Day
     {
         InputPath = inputPath;
         string[] input = File.ReadAllLines(@$"F:\Advent-Of-Code-2022\C-Sharp-Solutions\{InputPath}.txt");
-        try
-        {
-            string day1 = PartOne(input);
-            string day2 = PartTwo(input);
-            PrintResult(day1, day2);
-        }
-        catch
-        {
-            if (!continueOnError)
-                throw;
-            Console.WriteLine($"An error occured when solving {InputPath}\n");
-        }
+        string day1 = PartOne(input);
+        string day2 = PartTwo(input);
+        PrintResult(day1, day2);
     }
 
     public abstract string PartOne(string[] input);
