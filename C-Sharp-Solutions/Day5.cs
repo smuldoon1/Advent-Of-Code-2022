@@ -1,7 +1,6 @@
 ﻿// Part 1 - 44m 26s 89
 // Part 2 - 50m 18s 59
 using System.Text;
-using System.Text.RegularExpressions;
 
 class Day5 : Day
 {
@@ -14,8 +13,8 @@ class Day5 : Day
         (int firstInstruction, Stack<char>[] stacks) = GetStacks(input);
         for (int i = firstInstruction; i < input.Length; i++)
         {
-            var ins = Regex.Split(input[i][5..], @"\D+");
-            MoveCratesP1(stacks, int.Parse(ins[0]), int.Parse(ins[1]) - 1, int.Parse(ins[2]) - 1);
+            var ins = Utils.GetInts(input[i][5..]);
+            MoveCratesP1(stacks, ins[0], ins[1] - 1, ins[2] - 1);
         }
         StringBuilder sb = new StringBuilder();
         foreach (var stack in stacks)
@@ -30,8 +29,8 @@ class Day5 : Day
         (int firstInstruction, Stack<char>[] stacks) = GetStacks(input);
         for (int i = firstInstruction; i < input.Length; i++)
         {
-            var ins = Regex.Split(input[i][5..], @"\D+");
-            MoveCratesP2(stacks, int.Parse(ins[0]), int.Parse(ins[1]) - 1, int.Parse(ins[2]) - 1);
+            var ins = Utils.GetInts(input[i][5..]);
+            MoveCratesP2(stacks, ins[0], ins[1] - 1, ins[2] - 1);
         }
         StringBuilder sb = new StringBuilder();
         foreach (var stack in stacks)
