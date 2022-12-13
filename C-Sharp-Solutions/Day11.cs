@@ -31,8 +31,8 @@ class Day11 : Day
         for (int i = 0; i < input.Length; i += 7)
         {
             var monkey = Monkey2.AddMonkey();
-            monkey.items.AddRange(Utils.GetInts(input[i + 1]));
-            monkey.operation = GetOperation(input[i + 2].Split(" ")[5..]);
+            monkey.items.AddRange(Utils.GetInts(input[i + 1]).Select(x => (long)x));
+            monkey.operation = GetOperationL(input[i + 2].Split(" ")[5..]);
             monkey.divisibleBy = Utils.GetInt(input[i + 3]);
             monkey.throwToWhenTrue = Utils.GetInt(input[i + 4]);
             monkey.throwToWhenFalse = Utils.GetInt(input[i + 5]);
@@ -64,6 +64,28 @@ class Day11 : Day
                 return (value) => value * value;
             else
                 return (value) => int.Parse(line[0]) * value;
+        }
+    }
+
+    static Func<long, long> GetOperationL(string[] line)
+    {
+        if (line[1] == "+")
+        {
+            if (line[0] == "old" && long.TryParse(line[2], out long _))
+                return (value) => value + long.Parse(line[2]);
+            if (line[0] == "old" && line[2] == "old")
+                return (value) => value + value;
+            else
+                return (value) => long.Parse(line[0]) * value;
+        }
+        else
+        {
+            if (line[0] == "old" && long.TryParse(line[2], out long _))
+                return (value) => value * long.Parse(line[2]);
+            if (line[0] == "old" && line[2] == "old")
+                return (value) => value * value;
+            else
+                return (value) => long.Parse(line[0]) * value;
         }
     }
 
@@ -103,11 +125,11 @@ class Day11 : Day
     private class Monkey2
     {
         public static List<Monkey2> monkeys = new List<Monkey2>();
-        public static int Lcd => monkeys.Select(x => x.divisibleBy).Aggregate(1, (x, y) => x * y);
+        public static long Lcd => monkeys.Select(x => x.divisibleBy).Aggregate(1L, (x, y) => x * y);
 
-        public List<int> items = new List<int>();
-        public Func<int, int> operation = (int _) => throw new NotImplementedException();
-        public int divisibleBy = 0;
+        public List<long> items = new List<long>();
+        public Func<long, long> operation = (long _) => throw new NotImplementedException();
+        public long divisibleBy = 0;
         public int throwToWhenTrue = -1;
         public int throwToWhenFalse = -1;
         public long inspections = 0;
@@ -123,8 +145,7 @@ class Day11 : Day
         {
             while (items.Count > 0)
             {
-                items[0] = operation(items[0]);
-                items[0] = items[0] % Lcd;
+                items[0] = operation((int)items[0]) % Lcd;
                 if (items[0] % divisibleBy == 0)
                 {
                     monkeys[throwToWhenTrue].items.Add(items[0]);
