@@ -29,6 +29,6 @@ public abstract class Day
 
     public void PrintResult(string answer1, string answer2, TimeSpan time1, TimeSpan time2)
     {
-        Console.WriteLine($"Solution for {InputPath}\nPart 1: {answer1} ({time1.Seconds}s)\nPart 2: {answer2} ({time2.Seconds}s)\n");
+        Console.WriteLine($"Solution for {InputPath}\nPart 1: {answer1} ({time1.Seconds}.{time1.Milliseconds}s)\nPart 2: {answer2} ({time2.Seconds}.{time2.Milliseconds}s)\n");
     }
 }
