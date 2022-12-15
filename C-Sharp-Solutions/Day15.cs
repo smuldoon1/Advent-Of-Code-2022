@@ -10,7 +10,7 @@ class Day15 : Day
     public override string PartOne(string[] input)
     {
         int row = 2000000;
-                var coverage = new List<int>();
+        var coverage = new List<int>();
         var beaconsOnRow = new List<int>();
         foreach (string line in input)
         {
