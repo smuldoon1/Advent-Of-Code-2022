@@ -85,15 +85,10 @@ class Day15 : Day
 
         public List<int> GetBeaconCoverage(int row)
         {
-            var ints = new List<int>();
-            for (int x = -1000000; x < 5000000; x++)
-            {
-                int distance = Math.Abs(x - X) + Math.Abs(row - Y);
-                if (distance <= Distance)
-                {
-                    ints.Add(x);
-                }
-            }
+            int range = Distance - Math.Abs(row - Y);
+            if (range < 0)
+                return new List<int>();
+            var ints = Enumerable.Range(X - range, range * 2 + 1).ToList();
             return ints;
         }
 
