@@ -10,21 +10,14 @@ class Day15 : Day
     public override string PartOne(string[] input)
     {
         int row = 2000000;
-        var sensors = new List<Sensor>();
+                var coverage = new List<int>();
         var beaconsOnRow = new List<int>();
         foreach (string line in input)
         {
             var sensor = new Sensor(Utils.GetInts(line));
-            sensors.Add(sensor);
-            if (sensor.BeaconY == row && !beaconsOnRow.Contains(sensor.BeaconX))
-            {
-                beaconsOnRow.Add(sensor.BeaconX);
-            }
-        }
-        var coverage = new List<int>();
-        foreach (var sensor in sensors)
-        {
             coverage = coverage.Union(sensor.GetBeaconCoverage(row)).ToList();
+            if (sensor.BeaconY == row && !beaconsOnRow.Contains(sensor.BeaconX))
+                beaconsOnRow.Add(sensor.BeaconX);
         }
         return (coverage.Count - beaconsOnRow.Count).ToString();
     }
@@ -32,22 +25,17 @@ class Day15 : Day
     public override string PartTwo(string[] input)
     {
         var sensors = new List<Sensor>();
+        var positions = new List<(int x, int y)>();
         foreach (string line in input)
         {
             var sensor = new Sensor(Utils.GetInts(line));
             sensors.Add(sensor);
-        }
-        var positions = new List<(int x, int y)>();
-        foreach (var sensor in sensors)
-        {
             positions.AddRange(sensor.PositionsOutsideRadius());
         }
-        foreach (var position in positions)
+        foreach (var (x, y) in positions)
         {
-            if (IsDistressBeacon(position.x, position.y, sensors))
-            {
-                return (position.x * 4000000L + position.y).ToString();
-            }
+            if (IsDistressBeacon(x, y, sensors))
+                return (x * 4000000L + y).ToString();
         }
         return "-1";
     }
@@ -57,11 +45,8 @@ class Day15 : Day
         foreach (var sensor in sensors)
         {
             var distance = Math.Abs(x - sensor.X) + Math.Abs(y - sensor.Y);
-            if (distance <= sensor.Distance ||
-                x < 0 || y < 0 || x > 4000000 || y > 4000000)// || (x == 3859433 && y == 3323143) || (x == 2911363 && y == 2855041))
-            {
+            if (distance <= sensor.Distance || x < 0 || y < 0 || x > 4000000 || y > 4000000)
                 return false;
-            }
         }
         return true;
     }
