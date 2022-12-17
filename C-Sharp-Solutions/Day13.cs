@@ -13,18 +13,7 @@ class Day13 : Day
     {
         for (int i = 0; i < input.Length; i += 3)
         {
-            int depth = 0;
-            int cursor = 0;
-            while (true)
-            {
-                string a = Regex.Match(input[i].Substring(cursor), @".(\d+)?").Value;
-                string b = Regex.Match(input[i+1].Substring(cursor), @".(\d+)?").Value;
-                if (a == "[" && b == "[")
-                {
-                    depth++;
-                    cursor++;
-                }
-            }
+            var a = GetPacketList(input[i][1..^1]);
         }
         return "";
     }
@@ -32,5 +21,17 @@ class Day13 : Day
     public override string PartTwo(string[] input)
     {
         return "";
+    }
+
+    private static List<object> GetPacketList(string line)
+    {
+        var list = new List<object>();
+        list.Add(Regex.Match(line, @"^[^\[|\]]*").Value.Split(',').Select(x => int.Parse(x)));
+        int bracketIndex = line.IndexOfAny(new char[] { '[', ']' });
+        if (bracketIndex != -1 && line[bracketIndex] == '[')
+        {
+            list.Add(GetPacketList(Regex.Match(line[1..], @"^[^\[|\]]*").Value));
+        }
+        return list;
     }
 }

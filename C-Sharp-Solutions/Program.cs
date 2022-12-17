@@ -25,7 +25,9 @@ namespace C_Sharp_Solutions
                 new Day12("Day12"),
                 //new Day13("test"),
                 new Day14("Day14"),
-                new Day15("Day15")
+                //new Day15("Day15")
+                //new Day16("test2")
+                new Day17("test")
             );
         }
     }
