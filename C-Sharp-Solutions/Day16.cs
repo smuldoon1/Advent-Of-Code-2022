@@ -12,7 +12,7 @@ class Day16 : Day
     public override string PartOne(string[] input)
     {
         Valve startingValve = Valve.CreateNodeMap(input);
-        return startingValve.GetBestPath(30).ToString();
+        return ""; // startingValve.GetBestPath(30).ToString();
     }
 
     public override string PartTwo(string[] input)
@@ -57,15 +57,15 @@ class Day16 : Day
             return valves["AA"];
         }
 
-        public static int GetBestPath()
-        {
-            foreach (Valve valve in valves.Select(x => x.Value))
-            {
-                foreach (var connection in valve.connections)
-                {
-                    if ()
-                }
-            }
-        }
+        //public static int GetBestPath()
+        //{
+        //    foreach (Valve valve in valves.Select(x => x.Value))
+        //    {
+        //        foreach (var connection in valve.connections)
+        //        {
+        //            if ()
+        //        }
+        //    }
+        //}
     }
 }
