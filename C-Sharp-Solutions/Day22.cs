@@ -58,7 +58,52 @@ class Day22 : Day
 
     public override string PartTwo(string[] input)
     {
-        return "";
+        var gridLines = input.TakeWhile(x => x.Length > 0);
+        int[,] grid = new int[gridLines.Max(x => x.Length), gridLines.Count()];
+        for (int j = 0; j < grid.GetLength(1); j++)
+        {
+            for (int i = 0; i < grid.GetLength(0); i++)
+            {
+                if (i >= input[j].Length || input[j][i] == ' ')
+                    grid[i, j] = -1;
+                else if (input[j][i] == '.')
+                    grid[i, j] = 0;
+                else
+                    grid[i, j] = 1;
+            }
+        }
+        int c = 0;
+        do { c++; }
+        while (input[c].Length > 0);
+
+        (int x, int y)[] stepDirections = new[] { (1, 0), (0, 1), (-1, 0), (0, -1) };
+        (int x, int y) = (0, 0);
+        Direction facing = Direction.RIGHT;
+        var instructions = Regex.Matches(string.Concat(input[c..]), @"(\d+)|(\D)").Select(x => x.Value).ToArray();
+        for (int i = 0; i < instructions.Length; i++)
+        {
+            if (i % 2 == 0)
+            {
+                int step = 0;
+                while (step < int.Parse(instructions[i]))
+                {
+                    (int newX, int newY, Direction newFacing) = (x, y, facing);
+                    newX += stepDirections[(int)facing].x;
+                    newY = newY + stepDirections[(int)facing].y;
+                    if (newY < 0 || grid[newX, newY] == -1)
+                    {
+
+                    }
+                    if (grid[newX, newY] == 1)
+                        break;
+                    (x, y) = (newX, newY);
+                    step++;
+                }
+            }
+            else
+                facing = (Direction)Utils.Mod((int)facing + (instructions[i] == "L" ? -1 : 1), 4);
+        }
+        return (((y + 1) * 1000) + ((x + 1) * 4) + (int)facing).ToString();
     }
 
     private static string DisplayGrid(int[,] grid)
